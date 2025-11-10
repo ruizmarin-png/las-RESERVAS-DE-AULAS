@@ -1,0 +1,5 @@
+{
+  "name": "SISTEMA RESERVA AULAS",
+  "description": "An application to view and book time slots for three classrooms: A4, A5, and A6. Users can add their name to a time slot and everyone can see who is currently using each room.",
+  "requestFramePermissions": []
+}
