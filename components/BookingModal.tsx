@@ -31,6 +31,16 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, onBook, se
     }
     onBook(user);
   };
+  
+  const selectedDate = new Date(selectedSlot.day);
+  // Correct for timezone offset when creating date from 'YYYY-MM-DD' string
+  selectedDate.setMinutes(selectedDate.getMinutes() + selectedDate.getTimezoneOffset());
+
+  const formattedDate = selectedDate.toLocaleDateString('es-ES', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+  });
 
   return (
     <div 
@@ -43,7 +53,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, onBook, se
       >
         <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-2">Reservar Aula</h2>
         <p className="text-gray-600 dark:text-gray-300 mb-6">
-          Reservando aula <span className="font-semibold text-indigo-500 dark:text-indigo-400">{selectedSlot.classroom}</span> para el <span className="font-semibold text-indigo-500 dark:text-indigo-400">{selectedSlot.day}</span>,
+          Reservando aula <span className="font-semibold text-indigo-500 dark:text-indigo-400">{selectedSlot.classroom}</span> para el <span className="font-semibold text-indigo-500 dark:text-indigo-400">{formattedDate}</span>,
           turno de <span className="font-semibold text-indigo-500 dark:text-indigo-400">{selectedSlot.shift}</span> a <span className="font-semibold text-indigo-500 dark:text-indigo-400">{selectedSlot.period}</span> hora.
         </p>
         <form onSubmit={handleSubmit}>
